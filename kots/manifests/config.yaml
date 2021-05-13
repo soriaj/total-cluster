@@ -1,4 +1,3 @@
----
 apiVersion: kots.io/v1beta1
 kind: Config
 metadata:
@@ -27,43 +26,43 @@ spec:
           type: text
           default: "admin@mongodb.com"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
         - name: om_password
           title: Password
           help_text: Choose a strong password here, the service will not accept weak passwords
           type: password
           default: "MongoDB12345%"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
         - name: om_publicapikey
           title: Public API Key
           type: text
           default: "MongoDB12345%"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ps_manager_new` }}"
         - name: om_port
           title: Port
           type: text
           default: "8080"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
         - name: om_firstname
           title: First Name
           type: text
           default: "Joe"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
         - name: om_lastname
           title: Last Name
           type: text
           default: "McMongo"
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
         - name: om_service_type
           title: External Connectivity for Ops Manager
           type: select_one
           default: om_service_type_clusterip
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_new" }}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_new` }}"
           items:
             - name: om_service_type_clusterip
               title: None (ClusterIP only)
@@ -75,7 +74,7 @@ spec:
           title: NodePort
           type: text
           required: true
-          when: repl{{ ConfigOptionEquals "om_service_type" "om_service_type_nodeport"}}
+          when: "repl{{ ConfigOptionEquals `om_service_type` `om_service_type_nodeport`}}"
           help_text: NodePort should be between 30000-32767
 
     # config when an existing ops manager
@@ -87,18 +86,18 @@ spec:
           title: MongoDB API Public Key
           type: text
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_existing"}}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_existing`}}"
         - name: mongo_api_private_key
           title: MongoDB API Private Key
           type: password
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_existing"}}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_existing`}}" 
 
         - name: mongo_ops_manager_project_new_or_existing
           title: New or existing Ops/Cloud Manager project
           type: select_one
           default: ops_manager_new_project
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_existing"}}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_existing`}}"
           items:
             - name: ops_manager_new_project
               title: Create a New Project
@@ -109,20 +108,20 @@ spec:
           title: OpsManager Base URL
           type: text
           required: true
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_existing"}}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_existing`}}"
           value: "https://cloud.mongodb.com"
 
         - name: mongo_project_name
           title: Project Name
           type: text
-          when: repl{{ ConfigOptionEquals "mongo_ops_manager_project_new_or_existing" "ops_manager_existing_project"}}
+          when: "repl{{ ConfigOptionEquals `mongo_ops_manager_project_new_or_existing` `ops_manager_existing_project`}}"
           default: mongodb-enterprise-operator
 
         - name: mongo_ops_manager_org_new_or_existing
           title: New or existing Ops/Cloud Manager org
           type: select_one
           default: ops_manager_new_org
-          when: repl{{ ConfigOptionEquals "ops_manager_deploy_or_existing" "ops_manager_existing"}}
+          when: "repl{{ ConfigOptionEquals `ops_manager_deploy_or_existing` `ops_manager_existing`}}"
           items:
             - name: ops_manager_new_org
               title: Create a New Org
@@ -131,7 +130,7 @@ spec:
         - name: mongo_org_id
           title: Organization ID
           type: text
-          when: repl{{ ConfigOptionEquals "mongo_ops_manager_org_new_or_existing" "ops_manager_existing_org"}}
+          when: "repl{{ ConfigOptionEquals `mongo_ops_manager_org_new_or_existing` `ops_manager_existing_org`}}"
 
     - name: example_settings
       title: Mongo Configuration
@@ -161,17 +160,17 @@ spec:
           type: text
           required: true
           default: "mongodb-enterprise-database"
-          when: repl{{ ConfigOptionEquals "create_mongo_db" "1"}}
+          when: "repl{{ ConfigOptionEquals `create_mongo_db` `1`}}"
         - name: initial_members_count
           title: Number of Replicas
           type: text
           default: "3"
-          when: repl{{ ConfigOptionEquals "create_mongo_db" "1"}}
+          when: "repl{{ ConfigOptionEquals `create_mongo_db` `1`}}"
         - name: initial_version
           title: Version
           type: text
           default: "4.2.1"
-          when: repl{{ ConfigOptionEquals "create_mongo_db" "1"}}
+          when: "repl{{ ConfigOptionEquals `create_mongo_db` `1`}}"
     - name: smtp_mail
       title: SMTP Mail Configuration
       items:
@@ -185,22 +184,22 @@ spec:
           type: text
           required: true
           default: "smtp.gmail.com"
-          when: repl{{ ConfigOptionEquals "setup_smtp_mail" "1"}}
+          when: "repl{{ ConfigOptionEquals `setup_smtp_mail` `1`}}"
         - name: smtp_mail_username
           title: Username
           type: text
           required: true
           default: "example@server.com"
-          when: repl{{ ConfigOptionEquals "setup_smtp_mail" "1"}}
+          when: "repl{{ ConfigOptionEquals `setup_smtp_mail` `1`}}"
         - name: smtp_mail_password
           title: Password
-          type: text
+          type: password
           required: true
           default: "FOOFOOFOO"
-          when: repl{{ ConfigOptionEquals "setup_smtp_mail" "1"}}
+          when: "repl{{ ConfigOptionEquals `setup_smtp_mail` `1`}}"
         - name: smtp_mail_port
           title: Port
           type: text
           required: true
           default: "587"
-          when: repl{{ ConfigOptionEquals "setup_smtp_mail" "1"}}
+          when: "repl{{ ConfigOptionEquals `setup_smtp_mail` `1`}}"

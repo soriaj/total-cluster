@@ -9,7 +9,7 @@ spec:
   ports:
     - serviceName: "mongodb-k8s-ops-manager-svc"
       servicePort: 8080
-      localPort: 8080
+      localPort: 80
       applicationUrl: "http://mongodb-k8s-ops-manager-svc"
   statusInformers:
     - statefulset/mongodb-k8s-ops-manager

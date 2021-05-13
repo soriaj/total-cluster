@@ -14,7 +14,7 @@ operator:
   name: mongodb-enterprise-operator
 
   # Version of mongodb-enterprise-operator and mongodb-enterprise-database images
-  version: latest
+  version: 1.4.2
 
 database:
   name: mongodb-enterprise-database
@@ -59,7 +59,7 @@ opsManager:
     opLogStores:
     - name: oplog1
       mongodbResourceRef:
-        name: {{ .Release.Name }}-ops-manager-backup 
+        name: "{{ .Release.Name }}-ops-manager-backup" 
     s3Stores:
     - name: S3GatewayStore1
       mongodbResourceRef:
